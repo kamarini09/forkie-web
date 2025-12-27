@@ -1,5 +1,5 @@
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-import { SyncUser } from "./SyncUser";
+import { SyncUser } from "./components/auth/SyncUser";
 
 export default function Page() {
   return (
