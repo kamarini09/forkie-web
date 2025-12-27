@@ -1,18 +1,8 @@
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-import { SyncUser } from "./components/auth/SyncUser";
-
 export default function Page() {
   return (
-    <main style={{ padding: 24 }}>
-      <SignedOut>
-        <SignInButton />
-      </SignedOut>
-
-      <SignedIn>
-        <SyncUser />
-        <UserButton afterSignOutUrl="/" />
-        <p>Signed in ✅</p>
-      </SignedIn>
-    </main>
+    <>
+      <h1>Forkie</h1>
+      <p>Your recipe space — landing page.</p>
+    </>
   );
 }
