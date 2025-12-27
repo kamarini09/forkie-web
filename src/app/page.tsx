@@ -1,4 +1,5 @@
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { SyncUser } from "./SyncUser";
 
 export default function Page() {
   return (
@@ -8,6 +9,7 @@ export default function Page() {
       </SignedOut>
 
       <SignedIn>
+        <SyncUser />
         <UserButton afterSignOutUrl="/" />
         <p>Signed in ✅</p>
       </SignedIn>
