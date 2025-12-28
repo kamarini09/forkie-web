@@ -98,3 +98,37 @@ body {
 .btn:hover {
   background: rgba(255, 255, 255, 0.1);
 }
+
+/* Optional Clerk polish */
+.cl-card {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(17, 24, 39, 0.08);
+}
+
+.cl-title {
+  letter-spacing: -0.02em;
+}
+
+.cl-primaryBtn {
+  border-radius: 14px;
+}
+
+.cl-input {
+  border-radius: 12px;
+}
+
+.cl-socialBtn {
+  border-radius: 12px;
+}
+.auth-page {
+  min-height: calc(100vh - 64px); /* adjust if navbar height differs */
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #f6f7fb;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+}
