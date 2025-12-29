@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Recipe } from "@/types/recipe";
+import { RecipeActions } from "./RecipeActions";
 
 export function RecipeDetailsView({ recipe }: { recipe: Recipe }) {
   const meta: string[] = [];
@@ -9,13 +10,24 @@ export function RecipeDetailsView({ recipe }: { recipe: Recipe }) {
 
   return (
     <div style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
-      <div style={{ display: "flex", justifyContent: "space-between", gap: 12, alignItems: "flex-start" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          gap: 12,
+          alignItems: "flex-start",
+        }}
+      >
         <div>
           <h1 style={{ fontSize: 34, margin: 0 }}>{recipe.title}</h1>
+
           <div style={{ marginTop: 8, opacity: 0.75 }}>
             {recipe.isPublic ? "Public" : "Private"}
             {meta.length ? ` • ${meta.join(" • ")}` : null}
           </div>
+
+          {/* ✅ Actions (Fork button etc.) */}
+          <RecipeActions recipeId={recipe.id} />
         </div>
       </div>
 
