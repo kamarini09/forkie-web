@@ -42,3 +42,16 @@ export type RecipeFormState = {
   ingredients: Ingredient[];
   steps: { text: string }[];
 };
+
+export type RecipeSummary = {
+  id: string;
+  title: string;
+  description?: string | null;
+  isPublic: boolean;
+  servings?: number | null;
+  prepMinutes?: number | null;
+  cookMinutes?: number | null;
+  createdAt: string;
+  updatedAt: string;
+  forkedFrom?: { id: string; title: string } | null;
+};
