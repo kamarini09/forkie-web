@@ -1,17 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { useState } from "react";
 
-export function RecipeActions({ recipeId, ownerClerkId }: { recipeId: string; ownerClerkId: string }) {
-  const { getToken, isSignedIn, userId } = useAuth();
+export function RecipeActions({ recipeId, isOwner, ownerClerkId }: { recipeId: string; isOwner: boolean; ownerClerkId: string | null }) {
+  const { getToken, isSignedIn } = useAuth();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  const isOwner = !!userId && userId === ownerClerkId;
 
   const forkRecipe = async () => {
     setLoading(true);
@@ -38,7 +36,7 @@ export function RecipeActions({ recipeId, ownerClerkId }: { recipeId: string; ow
         throw new Error(data?.message ? JSON.stringify(data.message) : `HTTP ${res.status}`);
       }
 
-      // ✅ Best UX: go straight to edit the fork
+      // ✅ Go edit the fork immediately
       router.push(`/recipes/${data.id}/edit`);
     } catch (e: any) {
       setError(e?.message ?? "Unknown error");
@@ -48,7 +46,7 @@ export function RecipeActions({ recipeId, ownerClerkId }: { recipeId: string; ow
   };
 
   return (
-    <div style={{ marginTop: 16, display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+    <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
       {isOwner ? (
         <Link
           href={`/recipes/${recipeId}/edit`}
@@ -73,7 +71,7 @@ export function RecipeActions({ recipeId, ownerClerkId }: { recipeId: string; ow
             border: "1px solid rgba(255,255,255,0.12)",
           }}
         >
-          {loading ? "Forking..." : "Fork this recipe"}
+          {loading ? "Forking..." : "Fork"}
         </button>
       )}
 

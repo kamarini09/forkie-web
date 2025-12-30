@@ -1,8 +1,7 @@
 import Link from "next/link";
 import type { Recipe } from "@/types/recipe";
-import { RecipeActions } from "./RecipeActions";
 
-export function RecipeDetailsView({ recipe }: { recipe: Recipe }) {
+export function RecipeDetailsView({ recipe, actions }: { recipe: Recipe; actions?: React.ReactNode }) {
   const meta: string[] = [];
   if (recipe.servings != null) meta.push(`Servings: ${recipe.servings}`);
   if (recipe.prepMinutes != null) meta.push(`Prep: ${recipe.prepMinutes} min`);
@@ -10,15 +9,8 @@ export function RecipeDetailsView({ recipe }: { recipe: Recipe }) {
 
   return (
     <div style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          gap: 12,
-          alignItems: "flex-start",
-        }}
-      >
-        <div>
+      <div style={{ display: "flex", justifyContent: "space-between", gap: 12, alignItems: "flex-start" }}>
+        <div style={{ flex: 1 }}>
           <h1 style={{ fontSize: 34, margin: 0 }}>{recipe.title}</h1>
 
           <div style={{ marginTop: 8, opacity: 0.75 }}>
@@ -26,8 +18,8 @@ export function RecipeDetailsView({ recipe }: { recipe: Recipe }) {
             {meta.length ? ` • ${meta.join(" • ")}` : null}
           </div>
 
-          {/* ✅ Owner-aware actions */}
-          <RecipeActions recipeId={recipe.id} ownerClerkId={recipe.ownerClerkId} />
+          {/* ✅ actions live here (Edit/Fork/Heart later) */}
+          <div style={{ marginTop: 12 }}>{actions}</div>
         </div>
       </div>
 
