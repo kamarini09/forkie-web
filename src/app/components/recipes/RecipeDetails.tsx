@@ -26,8 +26,8 @@ export function RecipeDetailsView({ recipe }: { recipe: Recipe }) {
             {meta.length ? ` • ${meta.join(" • ")}` : null}
           </div>
 
-          {/* ✅ Actions (Fork button etc.) */}
-          <RecipeActions recipeId={recipe.id} />
+          {/* ✅ Owner-aware actions */}
+          <RecipeActions recipeId={recipe.id} ownerClerkId={recipe.ownerClerkId} />
         </div>
       </div>
 
@@ -42,7 +42,6 @@ export function RecipeDetailsView({ recipe }: { recipe: Recipe }) {
 
       {recipe.description ? <p style={{ marginTop: 16, fontSize: 16, lineHeight: 1.5 }}>{recipe.description}</p> : null}
 
-      {/* Ingredients */}
       <h2 style={{ marginTop: 28, fontSize: 22 }}>Ingredients</h2>
       {recipe.content.ingredients?.length ? (
         <ul style={{ paddingLeft: 20, lineHeight: 1.8 }}>
@@ -65,7 +64,6 @@ export function RecipeDetailsView({ recipe }: { recipe: Recipe }) {
         <div style={{ opacity: 0.7 }}>No ingredients.</div>
       )}
 
-      {/* Steps */}
       <h2 style={{ marginTop: 28, fontSize: 22 }}>Steps</h2>
       {recipe.content.steps?.length ? (
         <ol style={{ paddingLeft: 20, lineHeight: 1.8 }}>

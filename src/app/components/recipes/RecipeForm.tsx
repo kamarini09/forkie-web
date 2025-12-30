@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useAuth } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 import type { RecipeFormState } from "@/types/recipe";
 import { UNIT_OPTIONS } from "@/lib/units";
 
@@ -16,9 +17,11 @@ const emptyState: RecipeFormState = {
   steps: [{ text: "" }],
 };
 
-export function RecipeForm() {
+export function RecipeForm({ mode = "create", recipeId, initialValues }: { mode?: "create" | "edit"; recipeId?: string; initialValues?: RecipeFormState }) {
   const { getToken } = useAuth();
-  const [form, setForm] = useState<RecipeFormState>(emptyState);
+  const router = useRouter();
+
+  const [form, setForm] = useState<RecipeFormState>(initialValues ?? emptyState);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -68,6 +71,7 @@ export function RecipeForm() {
 
     try {
       if (!apiUrl) throw new Error("Missing NEXT_PUBLIC_API_URL");
+
       const token = await getToken();
       if (!token) throw new Error("Not authenticated (no Clerk token)");
 
@@ -91,8 +95,14 @@ export function RecipeForm() {
         },
       };
 
-      const res = await fetch(`${apiUrl}/recipes`, {
-        method: "POST",
+      const isEdit = mode === "edit";
+      if (isEdit && !recipeId) throw new Error("Missing recipeId for edit mode");
+
+      const url = isEdit ? `${apiUrl}/recipes/${recipeId}` : `${apiUrl}/recipes`;
+      const method = isEdit ? "PATCH" : "POST";
+
+      const res = await fetch(url, {
+        method,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -106,8 +116,9 @@ export function RecipeForm() {
         throw new Error(data?.message ? JSON.stringify(data.message) : `HTTP ${res.status}`);
       }
 
-      alert(`Recipe created! id=${data.id}`);
-      setForm(emptyState);
+      const targetId = data?.id ?? recipeId;
+      if (targetId) router.push(`/recipes/${targetId}`);
+      if (!isEdit) setForm(emptyState);
     } catch (e: any) {
       setError(e?.message ?? "Unknown error");
     } finally {
@@ -117,9 +128,8 @@ export function RecipeForm() {
 
   return (
     <div style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
-      <h1 style={{ fontSize: 32, marginBottom: 16 }}>Create recipe</h1>
+      <h1 style={{ fontSize: 32, marginBottom: 16 }}>{mode === "edit" ? "Edit recipe" : "Create recipe"}</h1>
 
-      {/* Basic */}
       <div style={{ display: "grid", gap: 12 }}>
         <label>
           Title *
@@ -154,7 +164,6 @@ export function RecipeForm() {
         </div>
       </div>
 
-      {/* Ingredients */}
       <h2 style={{ fontSize: 22, marginTop: 28 }}>Ingredients</h2>
       <div style={{ display: "grid", gap: 10 }}>
         {form.ingredients.map((ing, idx) => (
@@ -163,8 +172,7 @@ export function RecipeForm() {
 
             <input placeholder="qty" type="number" value={ing.quantity ?? ""} onChange={(e) => updateIngredient(idx, { quantity: e.target.value === "" ? undefined : Number(e.target.value) })} style={{ padding: 10 }} min={0} />
 
-            {/* ✅ Unit dropdown */}
-            <select value={ing.unit ?? ""} onChange={(e) => updateIngredient(idx, { unit: e.target.value === "" ? undefined : e.target.value })} style={{ padding: 10 }}>
+            <select value={ing.unit ?? ""} onChange={(e) => updateIngredient(idx, { unit: e.target.value === "" ? undefined : (e.target.value as any) })} style={{ padding: 10 }}>
               <option value="">unit</option>
               {UNIT_OPTIONS.map((u) => (
                 <option key={u} value={u}>
@@ -186,7 +194,6 @@ export function RecipeForm() {
         </button>
       </div>
 
-      {/* Steps */}
       <h2 style={{ fontSize: 22, marginTop: 28 }}>Steps</h2>
       <div style={{ display: "grid", gap: 10 }}>
         {form.steps.map((s, idx) => (
@@ -206,7 +213,7 @@ export function RecipeForm() {
       {error && <pre style={{ marginTop: 16, whiteSpace: "pre-wrap", color: "crimson" }}>Error: {error}</pre>}
 
       <button type="button" onClick={onSubmit} disabled={loading} style={{ marginTop: 18, padding: 12, width: "100%", fontSize: 18 }}>
-        {loading ? "Submitting..." : "Submit recipe"}
+        {loading ? "Submitting..." : mode === "edit" ? "Save changes" : "Submit recipe"}
       </button>
     </div>
   );

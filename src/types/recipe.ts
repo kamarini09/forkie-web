@@ -19,6 +19,8 @@ export type RecipeContent = {
 
 export type Recipe = {
   id: string;
+  userId: string;
+  ownerClerkId: string;
   title: string;
   description?: string | null;
   isPublic: boolean;
@@ -28,7 +30,6 @@ export type Recipe = {
   content: RecipeContent;
   createdAt: string; // API returns ISO string
   updatedAt: string;
-
   forkedFrom?: { id: string; title: string } | null;
 };
 
