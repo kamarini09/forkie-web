@@ -1,9 +1,9 @@
-import type { Recipe, RecipeFormState } from "@/types/recipe";
 import { auth } from "@clerk/nextjs/server";
-import { RecipeForm } from "@/app/components/recipes/RecipeForm";
+import type { Recipe, RecipeFormState } from "@/types/recipe";
+import { RecipeForm } from "@/app/components/recipes/form/RecipeForm";
 
 type Props = {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string }>; // Next 15
 };
 
 export default async function EditRecipePage({ params }: Props) {
@@ -27,8 +27,7 @@ export default async function EditRecipePage({ params }: Props) {
 
   const recipe: Recipe = await res.json();
 
-  // ✅ Correct ownership check (Clerk id vs Clerk id)
-  if (recipe.ownerClerkId !== userId) {
+  if (!recipe.ownerClerkId || recipe.ownerClerkId !== userId) {
     return (
       <div style={{ padding: 24 }}>
         <h1 style={{ fontSize: 22, marginBottom: 10 }}>Not allowed</h1>
