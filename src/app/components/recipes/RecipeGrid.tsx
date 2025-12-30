@@ -1,11 +1,7 @@
 import type { RecipeSummary } from "@/types/recipe";
 import { RecipeCard } from "./RecipeCard";
 
-type Props = {
-  recipes: RecipeSummary[];
-};
-
-export function RecipeGrid({ recipes }: Props) {
+export function RecipeGrid({ recipes }: { recipes: RecipeSummary[] }) {
   if (!recipes.length) {
     return <div style={{ padding: 24, opacity: 0.7 }}>No recipes yet.</div>;
   }

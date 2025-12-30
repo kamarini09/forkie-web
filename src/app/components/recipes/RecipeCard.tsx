@@ -1,11 +1,7 @@
 import Link from "next/link";
 import type { RecipeSummary } from "@/types/recipe";
 
-type Props = {
-  recipe: RecipeSummary;
-};
-
-export function RecipeCard({ recipe }: Props) {
+export function RecipeCard({ recipe }: { recipe: RecipeSummary }) {
   return (
     <Link
       href={`/recipes/${recipe.id}`}
@@ -19,15 +15,7 @@ export function RecipeCard({ recipe }: Props) {
     >
       <div style={{ display: "flex", justifyContent: "space-between", gap: 12 }}>
         <h3 style={{ fontSize: 18, margin: 0, lineHeight: 1.2 }}>{recipe.title}</h3>
-        <span
-          style={{
-            fontSize: 12,
-            opacity: 0.7,
-            whiteSpace: "nowrap",
-          }}
-        >
-          {recipe.isPublic ? "Public" : "Private"}
-        </span>
+        <span style={{ fontSize: 12, opacity: 0.7, whiteSpace: "nowrap" }}>{recipe.isPublic ? "Public" : "Private"}</span>
       </div>
 
       {recipe.description ? <p style={{ marginTop: 10, marginBottom: 12, opacity: 0.85 }}>{recipe.description}</p> : <p style={{ marginTop: 10, marginBottom: 12, opacity: 0.5 }}>No description</p>}
