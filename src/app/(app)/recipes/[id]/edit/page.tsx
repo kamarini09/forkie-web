@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import type { Recipe, RecipeFormState } from "@/types/recipe";
 import { RecipeForm } from "@/app/components/recipes/form/RecipeForm";
+import { FormPageShell } from "@/app/components/recipes/form/FormPageShell";
 
 type Props = {
   params: Promise<{ id: string }>; // Next 15
@@ -59,5 +60,9 @@ export default async function EditRecipePage({ params }: Props) {
       : [{ text: "" }],
   };
 
-  return <RecipeForm mode="edit" recipeId={recipe.id} initialValues={initialValues} />;
+  return (
+    <FormPageShell title="Edit recipe">
+      <RecipeForm mode="edit" recipeId={recipe.id} initialValues={initialValues} />
+    </FormPageShell>
+  );
 }

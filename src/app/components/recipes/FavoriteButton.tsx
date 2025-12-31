@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useAuth } from "@clerk/nextjs";
+import { Button } from "@/app/components/ui/Button";
+import { Heart } from "lucide-react";
 
 export function FavoriteButton({ recipeId, initialIsFavorited = false }: { recipeId: string; initialIsFavorited?: boolean }) {
   const { isSignedIn, getToken } = useAuth();
@@ -58,28 +60,23 @@ export function FavoriteButton({ recipeId, initialIsFavorited = false }: { recip
 
   return (
     <div style={{ display: "inline-flex", flexDirection: "column", gap: 8 }}>
-      <button
-        type="button"
+      <Button
         onClick={toggleFavorite}
         disabled={loading}
-        aria-pressed={isFav}
         style={{
-          padding: "10px 14px",
-          borderRadius: 10,
-          border: "1px solid rgba(31,42,68,0.35)",
-          background: "transparent",
-          cursor: "pointer",
-          display: "inline-flex",
+          border: isFav ? "2px solid var(--accent-primary)" : "1px solid var(--border-medium)",
+          background: isFav ? "rgba(45, 80, 22, 0.1)" : "var(--bg-secondary)",
+          color: isFav ? "var(--accent-primary)" : "var(--text-primary)",
+          display: "flex",
           alignItems: "center",
-          gap: 10,
-          opacity: loading ? 0.7 : 1,
+          gap: 8,
         }}
       >
-        <span style={{ fontSize: 18, lineHeight: 1 }}>{isFav ? "♥" : "♡"}</span>
+        <Heart size={16} strokeWidth={2} fill={isFav ? "currentColor" : "none"} />
         {loading ? "Saving..." : isFav ? "Favorited" : "Favorite"}
-      </button>
+      </Button>
 
-      {error && <div style={{ color: "crimson", fontSize: 12 }}>{error}</div>}
+      {error && <div style={{ color: "#ef4444", fontSize: 12 }}>{error}</div>}
     </div>
   );
 }

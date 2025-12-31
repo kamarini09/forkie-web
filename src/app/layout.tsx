@@ -6,24 +6,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <ClerkProvider
       appearance={{
-        // No baseTheme => stays LIGHT by default
         variables: {
-          colorPrimary: "#111827", // buttons/accents
-          colorBackground: "#ffffff", // card backgrounds
-          colorText: "#111827",
-          colorTextSecondary: "#6b7280",
-          colorInputBackground: "#ffffff",
-          colorInputText: "#111827",
-          borderRadius: "14px",
-          fontFamily: "ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial",
+          colorPrimary: "#2d5016",
+          colorBackground: "#faf8f3",
+          colorText: "#2d2a24",
+          colorTextSecondary: "#6b6760",
+          colorInputBackground: "#faf8f3",
+          colorInputText: "#2d2a24",
+          borderRadius: "12px",
+          fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
         },
-        // optional: fine-tune specific parts
         elements: {
-          card: "cl-card",
-          headerTitle: "cl-title",
-          formButtonPrimary: "cl-primaryBtn",
-          socialButtonsBlockButton: "cl-socialBtn",
-          formFieldInput: "cl-input",
+          card: "shadow-lg border border-gray-200",
+          headerTitle: "text-2xl font-bold",
+          formButtonPrimary: "shadow-md",
+          socialButtonsBlockButton: "hover:bg-gray-50",
+          formFieldInput: "focus:ring-green-800",
+          userButtonAvatarBox: "border-2 border-green-800",
+          userButtonPopoverCard: "border border-gray-200",
+          userButtonPopoverActionButton: "hover:bg-green-50",
         },
       }}
     >

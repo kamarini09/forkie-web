@@ -5,6 +5,7 @@ import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { FavoriteButton } from "./FavoriteButton";
+import { Button } from "@/app/components/ui/Button";
 
 export function RecipeActions({ recipeId, ownerClerkId, initialIsFavorited = false }: { recipeId: string; ownerClerkId: string | null; initialIsFavorited?: boolean }) {
   const { getToken, isSignedIn, userId } = useAuth();
@@ -53,42 +54,21 @@ export function RecipeActions({ recipeId, ownerClerkId, initialIsFavorited = fal
   };
 
   return (
-    <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+    <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
       {/* ✅ Favorites: works for ANY recipe, including your own */}
       <FavoriteButton recipeId={recipeId} initialIsFavorited={initialIsFavorited} />
 
       {isOwner ? (
-        <Link
-          href={`/recipes/${recipeId}/edit`}
-          style={{
-            padding: "10px 14px",
-            borderRadius: 10,
-            border: "1px solid rgba(31,42,68,0.35)",
-            textDecoration: "none",
-            display: "inline-block",
-            color: "inherit",
-          }}
-        >
-          Edit
+        <Link href={`/recipes/${recipeId}/edit`} style={{ textDecoration: "none" }}>
+          <Button style={{ width: "100%" }}>Edit</Button>
         </Link>
       ) : (
-        <button
-          type="button"
-          onClick={forkRecipe}
-          disabled={loading}
-          style={{
-            padding: "10px 14px",
-            borderRadius: 10,
-            border: "1px solid rgba(31,42,68,0.35)",
-            background: "transparent",
-            cursor: "pointer",
-          }}
-        >
+        <Button onClick={forkRecipe} disabled={loading} style={{ opacity: loading ? 0.6 : 1 }}>
           {loading ? "Forking..." : "Fork"}
-        </button>
+        </Button>
       )}
 
-      {error && <pre style={{ marginTop: 10, whiteSpace: "pre-wrap", color: "crimson" }}>{error}</pre>}
+      {error && <pre style={{ marginTop: 10, whiteSpace: "pre-wrap", color: "#ef4444", fontSize: 14 }}>{error}</pre>}
     </div>
   );
 }
