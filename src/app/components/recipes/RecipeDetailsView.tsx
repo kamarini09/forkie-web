@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Recipe } from "@/types/recipe";
+import { FavoriteButton } from "./FavoriteButton";
 
 export function RecipeDetailsView({ recipe, actions }: { recipe: Recipe; actions?: React.ReactNode }) {
   const meta: string[] = [];

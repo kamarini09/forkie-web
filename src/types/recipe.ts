@@ -33,6 +33,7 @@ export type Recipe = {
   prepMinutes?: number | null;
   cookMinutes?: number | null;
   content: RecipeContent;
+  isFavorited?: boolean;
 
   createdAt: string;
   updatedAt: string;
