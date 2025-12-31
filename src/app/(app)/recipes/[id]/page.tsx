@@ -20,7 +20,7 @@ export default async function RecipePage({ params }: Props) {
     headers.Authorization = `Bearer ${token}`;
   }
 
-  const res = await fetch(`${apiUrl}/recipes/${id}`, { 
+  const res = await fetch(`${apiUrl}/recipes/${id}`, {
     cache: "no-store",
     headers,
   });

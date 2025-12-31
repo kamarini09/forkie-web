@@ -16,7 +16,7 @@ export default async function RecipesPage() {
     headers.Authorization = `Bearer ${token}`;
   }
 
-  const res = await fetch(`${apiUrl}/recipes`, { 
+  const res = await fetch(`${apiUrl}/recipes`, {
     cache: "no-store",
     headers,
   });
