@@ -1,29 +1,54 @@
 :root {
-  --border: rgba(255, 255, 255, 0.12);
-  --muted: rgba(255, 255, 255, 0.7);
+  /* Paper + ink */
+  --paper: #f3eadf;
+  --paper2: #efe3d6;
+  --ink: #1f2a44;
+  --muted: rgba(31, 42, 68, 0.65);
+
+  /* accents like references */
+  --blue: #2f55ff;
+  --red: #ff3b30;
+
+  --line: rgba(31, 42, 68, 0.18);
+  --line-strong: rgba(31, 42, 68, 0.35);
+
+  --radius: 14px;
+  --card: rgba(243, 234, 223, 0.92);
 }
 
 * {
   box-sizing: border-box;
 }
-
 html,
 body {
   margin: 0;
   padding: 0;
 }
-
 body {
-  background: #0b0f17;
-  color: white;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background-color: var(--paper); /* solid paper */
+
+  /* grid overlay */
+  background-image: repeating-linear-gradient(0deg, rgba(31, 42, 68, 0.06) 0px, rgba(31, 42, 68, 0.06) 1px, transparent 1px, transparent 24px), repeating-linear-gradient(90deg, rgba(31, 42, 68, 0.04) 0px, rgba(31, 42, 68, 0.04) 1px, transparent 1px, transparent 24px);
 }
 
+/* Center “page” like the examples */
 .container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 24px;
+  max-width: 1040px;
+  margin: 26px auto;
+  padding: 26px 26px;
+  /* background: rgba(255, 255, 255, 0.25);
+  border: 1px solid var(--line);
+  border-radius: 20px; */
 }
+
+/* subtle grid lines (print vibe) */
+.container.grid-paper {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.22)), repeating-linear-gradient(0deg, rgba(31, 42, 68, 0.06) 0px, rgba(31, 42, 68, 0.06) 1px, transparent 1px, transparent 24px), repeating-linear-gradient(90deg, rgba(31, 42, 68, 0.04) 0px, rgba(31, 42, 68, 0.04) 1px, transparent 1px, transparent 24px);
+}
+
+/* Navbar (minimal, thin rules) */
 
 /* Navbar */
 .nav {
@@ -31,8 +56,8 @@ body {
   top: 0;
   z-index: 50;
   backdrop-filter: blur(10px);
-  background: rgba(11, 15, 23, 0.7);
-  border-bottom: 1px solid var(--border);
+  background: rgba(243, 234, 223, 0.92);
+  border-bottom: 1px solid rgba(31, 42, 68, 0.18);
 }
 
 .nav-inner {
@@ -54,30 +79,34 @@ body {
   font-weight: 800;
   letter-spacing: 0.2px;
   text-decoration: none;
-  color: white;
+  color: rgba(31, 42, 68, 0.95);
   font-size: 18px;
 }
 
 .nav-links {
   display: flex;
   gap: 14px;
+  align-items: center;
 }
 
 .nav-link {
-  color: var(--muted);
+  color: rgba(31, 42, 68, 0.75);
   text-decoration: none;
   padding: 8px 10px;
   border-radius: 10px;
+  border: 1px solid transparent;
 }
 
 .nav-link:hover {
-  color: white;
-  background: rgba(255, 255, 255, 0.06);
+  color: rgba(31, 42, 68, 0.95);
+  background: rgba(31, 42, 68, 0.05);
+  border-color: rgba(31, 42, 68, 0.1);
 }
 
 .nav-link.active {
-  color: white;
-  background: rgba(255, 255, 255, 0.1);
+  color: rgba(31, 42, 68, 0.98);
+  border-color: rgba(47, 85, 255, 0.35);
+  background: rgba(47, 85, 255, 0.1);
 }
 
 .nav-right {
@@ -86,49 +115,237 @@ body {
   gap: 12px;
 }
 
+/* Headings like references */
+.h1 {
+  margin: 0;
+  font-size: 34px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.kicker {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.page-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+/* Buttons: outlined “print UI” */
 .btn {
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.06);
-  color: white;
-  padding: 8px 12px;
-  border-radius: 10px;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--ink);
+  padding: 9px 12px;
+  border-radius: 12px;
   cursor: pointer;
+  font-weight: 700;
 }
 
 .btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(47, 85, 255, 0.55);
+  color: var(--blue);
 }
 
-/* Optional Clerk polish */
-.cl-card {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(17, 24, 39, 0.08);
+.btn-primary {
+  border-color: rgba(47, 85, 255, 0.65);
+  color: var(--blue);
 }
 
-.cl-title {
-  letter-spacing: -0.02em;
+.btn-danger {
+  border-color: rgba(255, 59, 48, 0.65);
+  color: var(--red);
 }
 
-.cl-primaryBtn {
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Grid + cards (thin blue borders, square feel) */
+
+/* ---------- Recipes grid + cards (editorial) ---------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 22px;
+  margin-top: 16px;
+}
+
+/* card becomes a clean outlined block like your references */
+.card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+
+  background: var(--card) !important;
+  border: 1px solid rgba(47, 85, 255, 0.45);
+  border-radius: 18px;
+
+  padding: 14px 14px 12px;
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+
+  background: var(--card) !important;
+  border-color: rgba(47, 85, 255, 0.85) !important;
+}
+
+/* top row: title + badge */
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 16px;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+}
+
+/* make description smaller + calmer */
+.card-desc {
+  margin: 10px 0 10px;
+  color: rgba(31, 42, 68, 0.72);
+  font-size: 13px;
+  line-height: 1.4;
+  min-height: 36px; /* makes cards align nicer */
+}
+
+/* meta pills like the reference tags */
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.pill {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(31, 42, 68, 0.22);
+  background: rgba(255, 255, 255, 0.32);
+  color: rgba(31, 42, 68, 0.72);
+}
+
+/* forked-from line */
+.forkline {
+  margin-top: 10px;
+  font-size: 12px;
+  color: rgba(31, 42, 68, 0.7);
+}
+
+.forkline span {
+  color: rgba(47, 85, 255, 0.95);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* better header layout */
+.page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(31, 42, 68, 0.14);
+  margin-bottom: 14px;
+}
+
+/* Recipe details */
+.kv {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.section-title {
+  margin-top: 28px;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+}
+.list {
+  padding-left: 18px;
+  line-height: 1.9;
+}
+.hr {
+  margin: 18px 0;
+  border: none;
+  border-top: 1px solid var(--line);
+}
+
+/* Form controls (outlined) */
+.field {
+  display: grid;
+  gap: 8px;
+}
+.label {
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.35);
+  padding: 10px 12px;
   border-radius: 14px;
+  outline: none;
+  color: var(--ink);
 }
 
-.cl-input {
-  border-radius: 12px;
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: rgba(47, 85, 255, 0.75);
 }
 
-.cl-socialBtn {
-  border-radius: 12px;
+.textarea {
+  min-height: 90px;
+  resize: vertical;
 }
+.row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.small {
+  width: 140px;
+}
+
+/* Auth card matches paper */
 .auth-page {
-  min-height: calc(100vh - 64px); /* adjust if navbar height differs */
+  min-height: calc(100vh - 64px);
   display: grid;
   place-items: center;
   padding: 24px;
-  background: #f6f7fb;
 }
 
 .auth-card {
   width: 100%;
   max-width: 420px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  padding: 14px;
 }

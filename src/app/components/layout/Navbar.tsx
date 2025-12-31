@@ -6,7 +6,7 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
   const pathname = usePathname();
-  const active = pathname === href;
+  const active = pathname === href || pathname.startsWith(href + "/");
 
   return (
     <Link href={href} className={`nav-link ${active ? "active" : ""}`}>
@@ -25,13 +25,11 @@ export default function Navbar() {
           </Link>
 
           <nav className="nav-links">
-            {/* Only show these when signed in */}
             <SignedIn>
               <NavLink href="/recipes">Recipes</NavLink>
               <NavLink href="/profile">Profile</NavLink>
             </SignedIn>
 
-            {/* Public link */}
             <NavLink href="/about">About</NavLink>
           </nav>
         </div>
@@ -39,7 +37,9 @@ export default function Navbar() {
         <div className="nav-right">
           <SignedOut>
             <SignInButton mode="modal">
-              <button className="btn">Sign in</button>
+              <button className="btn" type="button">
+                Sign in
+              </button>
             </SignInButton>
           </SignedOut>
 
