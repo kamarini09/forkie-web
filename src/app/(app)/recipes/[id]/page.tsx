@@ -1,5 +1,6 @@
 import { RecipeDetailsView } from "@/app/components/recipes/RecipeDetailsView";
 import { RecipeActions } from "@/app/components/recipes/RecipeActions";
+import { auth } from "@clerk/nextjs/server";
 import type { Recipe } from "@/types/recipe";
 import { BackButton } from "@/app/components/ui/BackButton";
 
@@ -11,7 +12,18 @@ export default async function RecipePage({ params }: Props) {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   if (!apiUrl) return <div style={{ padding: 32, textAlign: "center", color: "var(--text-muted)" }}>Missing NEXT_PUBLIC_API_URL</div>;
 
-  const res = await fetch(`${apiUrl}/recipes/${id}`, { cache: "no-store" });
+  const { getToken } = await auth();
+  const token = await getToken();
+
+  const headers: HeadersInit = {};
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  const res = await fetch(`${apiUrl}/recipes/${id}`, { 
+    cache: "no-store",
+    headers,
+  });
 
   if (res.status === 404) return <div style={{ padding: 32, textAlign: "center", color: "var(--text-muted)" }}>Recipe not found.</div>;
   if (!res.ok) return <div style={{ padding: 32, textAlign: "center", color: "var(--text-muted)" }}>Failed to load recipe (HTTP {res.status})</div>;
