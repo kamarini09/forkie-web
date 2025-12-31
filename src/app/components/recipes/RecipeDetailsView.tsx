@@ -47,7 +47,7 @@ export function RecipeDetailsView({ recipe, actions }: { recipe: Recipe; actions
         }}
       >
         <div style={{ flex: 1 }}>
-          <h1 className="h1" style={{ marginBottom: 12 }}>
+          <h1 className="h1" style={{ marginBottom: 12, fontSize: 48 }}>
             {recipe.title}
           </h1>
 
@@ -89,7 +89,7 @@ export function RecipeDetailsView({ recipe, actions }: { recipe: Recipe; actions
       {recipe.description ? <p style={{ marginTop: 24, fontSize: 16, lineHeight: 1.6, color: "var(--text-secondary)" }}>{recipe.description}</p> : null}
 
       {/* Ingredients & Steps Grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginTop: 40 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 24, marginTop: 40 }}>
         {/* Ingredients Card */}
         <div
           style={{
@@ -149,7 +149,10 @@ export function RecipeDetailsView({ recipe, actions }: { recipe: Recipe; actions
               })}
             </div>
           ) : (
-            <div style={{ color: "var(--text-muted)", marginTop: 16 }}>No ingredients.</div>
+            <div style={{ color: "var(--text-muted)", marginTop: 16, textAlign: "center", padding: "20px 0" }}>
+              <ShoppingBasket size={32} strokeWidth={1.5} style={{ opacity: 0.3, marginBottom: 8 }} />
+              <div>No ingredients yet</div>
+            </div>
           )}
         </div>
 
@@ -221,7 +224,10 @@ export function RecipeDetailsView({ recipe, actions }: { recipe: Recipe; actions
                 })}
             </div>
           ) : (
-            <div style={{ color: "var(--text-muted)", marginTop: 16 }}>No steps.</div>
+            <div style={{ color: "var(--text-muted)", marginTop: 16, textAlign: "center", padding: "20px 0" }}>
+              <ChefHat size={32} strokeWidth={1.5} style={{ opacity: 0.3, marginBottom: 8 }} />
+              <div>No instructions yet</div>
+            </div>
           )}
         </div>
       </div>

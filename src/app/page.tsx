@@ -12,7 +12,7 @@ export default function Page() {
       }}
     >
       <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center" }}>
-        <h1 className="h1" style={{ marginBottom: 24, fontSize: 56, color: "white" }}>
+<h1 className="h1" style={{ marginBottom: 24, fontSize: "clamp(36px, 8vw, 56px)", color: "white" }}>
           Forkie
         </h1>
 
@@ -31,7 +31,7 @@ export default function Page() {
           </Link>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 32, textAlign: "left" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 32, textAlign: "left" }}>
           <div>
             <h3 style={{ fontSize: 18, fontWeight: 600, color: "white", marginBottom: 12 }}>Create & Organize</h3>
             <p style={{ color: "rgba(255, 255, 255, 0.85)", fontSize: 15, lineHeight: 1.6 }}>Build your personal recipe collection with an intuitive editor. Add ingredients, steps, and cooking details.</p>
