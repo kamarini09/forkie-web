@@ -12,7 +12,7 @@ export default function Page() {
       }}
     >
       <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center" }}>
-<h1 className="h1" style={{ marginBottom: 24, fontSize: "clamp(36px, 8vw, 56px)", color: "white" }}>
+        <h1 className="h1" style={{ marginBottom: 24, fontSize: "clamp(36px, 8vw, 56px)", color: "white" }}>
           Forkie
         </h1>
 
