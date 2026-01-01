@@ -36,20 +36,18 @@ export function FavoriteButton({ recipeId, initialIsFavorited = false }: { recip
 
       const method = next ? "POST" : "DELETE";
 
-      const res = await fetch(`${apiUrl}/recipes/${recipeId}/favorite`, {
+      const res = await fetch(`${apiUrl}/me/favorites/${recipeId}`, {
         method,
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      const data = await res.json().catch(() => null);
-
       if (!res.ok) {
+        const data = await res.json().catch(() => null);
         setIsFav(prev);
         throw new Error(data?.message ? JSON.stringify(data.message) : `HTTP ${res.status}`);
       }
 
-      // backend returns { ok: true, isFavorited: boolean }
-      if (typeof data?.isFavorited === "boolean") setIsFav(data.isFavorited);
+      // Success - keep the optimistic update
     } catch (e: any) {
       setIsFav(prev);
       setError(e?.message ?? "Unknown error");
