@@ -6,45 +6,28 @@ export default function Page() {
       </h1>
 
       <div style={{ fontSize: 16, color: "var(--text-primary)", lineHeight: 1.8, display: "flex", flexDirection: "column", gap: 24 }}>
-        <p>Forkie is a modern recipe management platform designed for home cooks, food enthusiasts, and anyone who loves to create in the kitchen.</p>
+        <p>Forkie was built around a simple idea: recipes evolve. Most people don&apos;t follow a recipe exactly — they adjust it for taste, dietary needs, available ingredients, or just because they learned a better way. But on most recipe platforms, those changes end up as private notes or disconnected copies, and the connection to the original recipe gets lost.</p>
 
-        <p>Whether you're organizing family recipes, experimenting with new dishes, or sharing your culinary creations with the world, Forkie provides a clean, intuitive space to store and manage your recipes.</p>
+        <p>Forkie makes that process more natural by introducing forking for recipes. When you fork a recipe, you create your own variation that you can edit and publish — while still keeping a clear &quot;forked from&quot; link to the original recipe and creator. This keeps credit visible and makes it easier to share improvements in a transparent way.</p>
 
         <h2 className="section-title" style={{ marginTop: 32 }}>
-          Features
+          What you can do
         </h2>
 
         <ul style={{ paddingLeft: 24, display: "flex", flexDirection: "column", gap: 12 }}>
-          <li>
-            <strong>Recipe Editor:</strong> Create detailed recipes with ingredients, instructions, prep time, and serving sizes.
-          </li>
-          <li>
-            <strong>Public & Private Recipes:</strong> Choose to share your recipes publicly or keep them private for personal use.
-          </li>
-          <li>
-            <strong>Fork Recipes:</strong> Found a recipe you love? Fork it to your collection and make it your own.
-          </li>
-          <li>
-            <strong>Favorites:</strong> Bookmark recipes for quick access to your go-to dishes.
-          </li>
-          <li>
-            <strong>Modern Design:</strong> Clean, distraction-free interface focused on your recipes.
-          </li>
+          <li>Create and publish your own recipes</li>
+          <li>Fork recipes from other users and make your own version</li>
+          <li>Keep a link back to the original recipe for attribution</li>
+          <li>Save favorite recipes and build your personal collection</li>
         </ul>
 
         <h2 className="section-title" style={{ marginTop: 32 }}>
-          Our Mission
+          Why &quot;forking&quot;?
         </h2>
 
-        <p>We believe that cooking is both an art and a science, and that great recipes deserve a great home. Forkie aims to make recipe management simple, beautiful, and collaborative.</p>
+        <p>Forking is inspired by how collaboration works in software, but here it&apos;s used in a simple way: it&apos;s just a clean way to say &quot;I made my own version of this recipe.&quot;</p>
 
-        <p style={{ marginTop: 32, padding: 20, background: "rgba(45, 80, 22, 0.05)", border: "2px solid var(--accent-primary)", borderRadius: 12 }}>
-          <strong>Ready to get started?</strong>{" "}
-          <a href="/sign-in" style={{ color: "var(--accent-primary)", textDecoration: "underline" }}>
-            Sign in
-          </a>{" "}
-          and start building your recipe collection today.
-        </p>
+        <p style={{ marginTop: 32, fontStyle: "italic", fontSize: 18, color: "var(--accent-primary)" }}>Whether you tweak one ingredient or rewrite the whole recipe, Forkie is built for variations.</p>
       </div>
     </div>
   );
