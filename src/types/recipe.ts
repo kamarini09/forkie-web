@@ -19,10 +19,8 @@ export type RecipeContent = {
 
 export type Recipe = {
   id: string;
-
   // comes from backend now (DB uuid)
   userId?: string;
-
   // ✅ important for frontend owner checks (Clerk id)
   ownerClerkId?: string | null;
 
@@ -30,8 +28,8 @@ export type Recipe = {
   description?: string | null;
   isPublic: boolean;
   servings?: number | null;
-  prepMinutes?: number | null;
-  cookMinutes?: number | null;
+  prepMinutes: number | null;
+  cookMinutes: number | null;
   content: RecipeContent;
   isFavorited?: boolean;
 
@@ -45,9 +43,9 @@ export type RecipeFormState = {
   title: string;
   description: string;
   isPublic: boolean;
-  servings?: number;
-  prepMinutes?: number;
-  cookMinutes?: number;
+  servings: number;
+  prepMinutes: number;
+  cookMinutes: number;
   ingredients: Ingredient[];
   steps: { text: string }[];
 };
@@ -57,7 +55,7 @@ export type RecipeSummary = {
   title: string;
   description?: string | null;
   isPublic: boolean;
-  servings?: number | null;
+  servings: number | null;
   prepMinutes?: number | null;
   cookMinutes?: number | null;
   createdAt: string;

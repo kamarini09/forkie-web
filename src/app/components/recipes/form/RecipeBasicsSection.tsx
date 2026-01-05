@@ -28,21 +28,21 @@ export function RecipeBasicsSection({ form, setField }: { form: RecipeFormState;
           <label className="label" style={{ display: "flex", alignItems: "center", gap: 6 }}>
             <Users size={14} strokeWidth={2} /> Servings
           </label>
-          <input className="input" type="number" value={form.servings ?? ""} onChange={(e) => setField("servings", e.target.value === "" ? undefined : Number(e.target.value))} placeholder="4" min={1} />
+          <input className="input" type="number" value={form.servings ?? ""} onChange={(e) => setField("servings", e.target.value === "" ? null : Number(e.target.value))} placeholder="4" min={1} />
         </div>
 
         <div className="field" style={{ flex: 1, minWidth: 140 }}>
           <label className="label" style={{ display: "flex", alignItems: "center", gap: 6 }}>
             <Clock size={14} strokeWidth={2} /> Prep Time (min)
           </label>
-          <input className="input" type="number" value={form.prepMinutes ?? ""} onChange={(e) => setField("prepMinutes", e.target.value === "" ? undefined : Number(e.target.value))} placeholder="15" min={0} />
+          <input className="input" type="number" value={form.prepMinutes ?? ""} onChange={(e) => setField("prepMinutes", e.target.value === "" ? null : Number(e.target.value))} placeholder="15" min={0} />
         </div>
 
         <div className="field" style={{ flex: 1, minWidth: 140 }}>
           <label className="label" style={{ display: "flex", alignItems: "center", gap: 6 }}>
             <Flame size={14} strokeWidth={2} /> Cook Time (min)
           </label>
-          <input className="input" type="number" value={form.cookMinutes ?? ""} onChange={(e) => setField("cookMinutes", e.target.value === "" ? undefined : Number(e.target.value))} placeholder="30" min={0} />
+          <input className="input" type="number" value={form.cookMinutes ?? ""} onChange={(e) => setField("cookMinutes", e.target.value === "" ? null : Number(e.target.value))} placeholder="30" min={0} />
         </div>
       </div>
 
