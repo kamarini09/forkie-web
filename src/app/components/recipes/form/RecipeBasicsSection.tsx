@@ -1,7 +1,7 @@
 "use client";
 
 import type { RecipeFormState } from "@/types/recipe";
-import { FileText, Users, Clock, Flame, Globe, Lock } from "lucide-react";
+import { FileText, Users, Clock, Flame, Lock } from "lucide-react";
 
 export function RecipeBasicsSection({ form, setField }: { form: RecipeFormState; setField: <K extends keyof RecipeFormState>(key: K, value: RecipeFormState[K]) => void }) {
   return (

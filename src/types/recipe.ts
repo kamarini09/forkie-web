@@ -43,9 +43,9 @@ export type RecipeFormState = {
   title: string;
   description: string;
   isPublic: boolean;
-  servings: number;
-  prepMinutes: number;
-  cookMinutes: number;
+  servings: number | null;
+  prepMinutes: number | null;
+  cookMinutes: number | null;
   ingredients: Ingredient[];
   steps: { text: string }[];
 };
