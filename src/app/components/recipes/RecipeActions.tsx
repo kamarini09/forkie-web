@@ -55,7 +55,7 @@ export function RecipeActions({ recipeId, ownerClerkId, initialIsFavorited = fal
 
   return (
     <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
-      {/* ✅ Favorites: works for ANY recipe, including your own */}
+      {/* Favorites: works for ANY recipe, including your own */}
       <FavoriteButton recipeId={recipeId} initialIsFavorited={initialIsFavorited} />
 
       {isOwner ? (
